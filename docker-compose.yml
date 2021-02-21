@@ -1,0 +1,44 @@
+version: "3"
+services:
+  product-app:
+    container_name: product-app
+    restart: always
+    build: product-app/
+    ports:
+      - "3000:3000"
+    links:
+      - mongo
+      - authentication-app
+    volumes:
+    - ./product-app:/usr/src/product-app
+
+  authentication-app:
+    container_name: authentication-app
+    restart: always
+    build: authentication-app/
+    ports:
+      - "3001:3001"
+    links:
+      - mongo
+    volumes:
+    - ./authentication-app:/usr/src/authentication-app
+
+  order-app:
+    container_name: order-app
+    restart: always
+    build: order-app/
+    ports:
+      - "3002:3002"
+    links:
+      - mongo
+      - authentication-app
+    volumes:
+    - ./order-app:/usr/src/order-app
+
+  mongo:
+    container_name: mongo
+    image: mongo
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27018:27018"
