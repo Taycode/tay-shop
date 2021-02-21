@@ -3,6 +3,15 @@ const express = require('express');
 const httpErrors = require('http-errors');
 const logger = require('morgan');
 const path = require('path');
+const { MongoClient } = require('mongodb');
+
+MongoClient.connect('mongodb://mongo:27017', (err, client) => {
+  if (err) {
+    console.log(`Error ${err.message}`);
+  } else if (client) {
+    console.log('Mongoose Connected on Authentication app');
+  }
+});
 
 const indexRouter = require('./routes/index');
 
