@@ -7,7 +7,7 @@ authentication-app: handles the authentication on the app
 product-app: handles the retrieving, creating and deleting of products on the app
 order-app: handles the orders on the app
 
-link to documentation: https://www.getpostman.com/collections/edd0c0f4573d43b97f9e
+link to documentation: https://documenter.getpostman.com/view/8015237/TWDXpxVd
 
 Authentication-app endpoints:
 - login
