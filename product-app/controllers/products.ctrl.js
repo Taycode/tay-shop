@@ -60,6 +60,31 @@ class ProductsCtrl {
       });
     }
   }
+
+  static async getOneProduct(req, res) {
+    try {
+      const { productId } = req.params;
+      const product = await ProductService.getProductById(productId);
+
+      if (!product) {
+        return res.status(404).json({
+          status: 'error',
+          message: 'Product not found',
+        });
+      }
+
+      return res.status(200).json({
+        status: 'success',
+        data: product,
+        message: 'Product Fetched'
+      });
+    } catch (error) {
+      return res.status(400).json({
+        status: 'error',
+        message: error.message,
+      });
+    }
+  }
 }
 
 module.exports = ProductsCtrl;
