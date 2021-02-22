@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const ProductController = require('../controllers/products.ctrl');
 
 const router = Router();
 
@@ -8,5 +9,7 @@ router.get('/', (req, res) => {
     title: 'Express'
   });
 });
+
+router.post('/create', ProductController.createProduct);
 
 module.exports = router;

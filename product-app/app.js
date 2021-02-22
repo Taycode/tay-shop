@@ -3,6 +3,17 @@ const express = require('express');
 const httpErrors = require('http-errors');
 const logger = require('morgan');
 const path = require('path');
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://mongo:27017/tay-shop', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true
+});
+
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'MongoDB Connection error'));
 
 const indexRouter = require('./routes/index');
 
