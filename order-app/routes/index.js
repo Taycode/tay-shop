@@ -11,5 +11,6 @@ router.get('/', (req, res) => {
 });
 
 router.post('/create', OrderController.createOrder);
+router.post('/mark-as-paid/:orderId', OrderController.markOrderAsPaid);
 
 module.exports = router;

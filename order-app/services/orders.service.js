@@ -16,6 +16,18 @@ class OrdersService {
     const totalPrice = product.data.price * data.quantity;
     return Order.create({ ...data, totalPrice });
   }
+
+  static async updateOrder(orderId, data) {
+    await Order.updateOne({ _id: orderId }, data);
+    return Order.findById(orderId);
+  }
+
+  static async markOrderAsPaid(orderId, transactionReference) {
+    return OrdersService.updateOrder(orderId, {
+      transactionReference,
+      paid: true,
+    });
+  }
 }
 
 module.exports = OrdersService;

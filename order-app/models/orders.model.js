@@ -24,7 +24,10 @@ const OrderSchema = new Schema({
   phoneNumber: {
     type: String,
     required: true,
-  }
+  },
+  transactionReference: {
+    type: String,
+  },
 });
 
 const Order = model('Order', OrderSchema);

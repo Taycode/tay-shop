@@ -16,7 +16,7 @@ const ProductSchema = new Schema({
     type: Schema.Types.ObjectId,
     required: true,
     ref: 'User',
-  }
+  },
 });
 
 const Product = model('Product', ProductSchema);

@@ -17,5 +17,23 @@ class OrdersCtrl {
       });
     }
   }
+
+  static async markOrderAsPaid(req, res) {
+    try {
+      const { transactionReference } = req.body;
+      const { orderId } = req.params;
+      const order = await OrderServices.markOrderAsPaid(orderId, transactionReference);
+      return res.status(200).json({
+        status: 'success',
+        data: order,
+        message: 'Order Payment Marked as successful'
+      });
+    } catch (error) {
+      return res.status(400).json({
+        status: 'error',
+        message: error.message,
+      });
+    }
+  }
 }
 module.exports = OrdersCtrl;
