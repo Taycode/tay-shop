@@ -3,15 +3,18 @@ const express = require('express');
 const httpErrors = require('http-errors');
 const logger = require('morgan');
 const path = require('path');
-const { MongoClient } = require('mongodb');
+const mongoose = require('mongoose');
+require('dotenv').config();
 
-MongoClient.connect('mongodb://mongo:27017', (err, client) => {
-  if (err) {
-    console.log(`Error ${err.message}`);
-  } else if (client) {
-    console.log('Mongoose Connected on Authentication app');
-  }
+mongoose.connect('mongodb://mongo:27017/tay-shop', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true
 });
+
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'MongoDB Connection error'));
 
 const indexRouter = require('./routes/index');
 
@@ -19,7 +22,7 @@ const app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));

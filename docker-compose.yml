@@ -17,7 +17,7 @@ services:
     restart: always
     build: authentication-app/
     ports:
-      - "3001:3001"
+      - "3001:3000"
     links:
       - mongo
     volumes:
@@ -28,7 +28,7 @@ services:
     restart: always
     build: order-app/
     ports:
-      - "3002:3002"
+      - "3002:3000"
     links:
       - mongo
       - authentication-app
@@ -39,6 +39,8 @@ services:
     container_name: mongo
     image: mongo
     volumes:
-      - ./data:/data/db
+      - data:/data/db
     ports:
-      - "27018:27018"
+      - "27017:27017"
+volumes:
+  data:
